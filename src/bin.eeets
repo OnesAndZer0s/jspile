@@ -1,0 +1,88 @@
+#!/usr/bin/env node
+const CONFIGURATION_LABEL = "Configurations:",
+      OPTIONS_LABEL = "Options:";
+
+import * as fs from "fs";
+import * as path from "path";
+// import { unpack } from "./arcIndex.js";
+// var argv = require('minimist')(process.argv.slice(2))
+import chalk from "chalk";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
+
+
+// ----------------------------------------------------------------------------
+// Set up configuration
+// ----------------------------------------------------------------------------
+
+var usage = "\nUsage: $0 <input> [options..]", 
+    argHandler = yargs( hideBin( process.argv ) )
+      .usage( usage )
+      .option( { 
+      //   "input": { alias:"i", desc: "Bundle to debundle", type: "string", group:OPTIONS_LABEL }, 
+      //   "output": { alias:"o", desc: "Directory to debundle code into", type: "string", default:"./", group:OPTIONS_LABEL },
+
+      //   "config": { alias:"c", desc: "Configuration file in JSON, or JSON string. CLI configurations have higher priority", group:CONFIGURATION_LABEL, type:"string", normalize:true },
+      //   "knownPaths": { desc: "An object mapping module ids to the location on disk to put a given module", group:CONFIGURATION_LABEL },
+      //   "moduleAst": { desc: "Instructions to get a reference to the module ast", group:CONFIGURATION_LABEL },
+      //   "type": { desc: "Type of bundle", group:CONFIGURATION_LABEL, choices:[ "webpack", "browserify" ], default:"webpack" },
+      //   "replaceRequires": { desc: "When working on a minified bundle, tell debundle how to adjust require statements to work in a node context", group:CONFIGURATION_LABEL, default:"inline" },
+      //   "entryPoint": { desc: "The entry point module id. If left empty in a Browserify bundle it can often be calculated procedurally. When in doubt, webpack bundles often have their entry point at module 0", group:CONFIGURATION_LABEL }
+      } )
+      .help()
+      .alias( "h", "help" )
+      .alias( "v", "version" ).argv,
+  // .parse( "test.js -c test.json --type browserify" );
+  //   .config( "config", cfg => {
+  //     cfg = ( !fs.existsSync( cfg ) ) ? cfg.replace( `${process.cwd()}/`, "" ) : fs.readFileSync( cfg, "utf-8" );
+  //     try { cfg = JSON.parse( cfg ); } catch ( e ){ cfg = {}; }
+  //     return cfg;
+  //   } )
+  //   .coerce( "knownPaths", convertToIntegerKey ),
+
+  // args = argHandler.argv;
+
+  // if ( args._[ 0 ] ){ args.input = args._[ 0 ]; delete args._; }
+  // if ( !args.input ) throw new Error( "input has to be defined." );
+  // if ( fs.existsSync( args.input ) == false ) throw new Error( "input has to exist." );
+
+  // if ( !args.moduleAst ) {
+  //   if ( args.type === "browserify" )
+  //   // Where browserify defaultly stores all it's embedded modules as an object
+  //     args.moduleAst = [ "body", 0, "expression", "arguments", 0 ];
+  //   else if ( args.type === "webpack" ) 
+  //   // Where webpack defaultly stores all it's embedded modules as an array
+  //     args.moduleAst = [ "body", 0, "expression", "arguments", 0 ];
+  //   console.log( `* Using default AST location for ${args.type}...` );
+  // }
+
+
+    usage = "webpack-unpack [--out outdir] < file.js";
+
+
+// concat( process.stdin, ( err, contents ) => {
+//   if ( err ) throw err;
+//   var modules = unpack( contents );
+
+//   if ( !modules ) {
+//     console.error( "could not parse bundle" );
+//     process.exit( 1 );
+//   }
+
+//   if ( argv.out ) {
+//     var outdir = argv.out;
+
+//     modules.forEach( row => {
+//       fs.writeFileSync( path.join( outdir, row.id + ".js" ), row.source );
+//     } );
+
+//     console.log( "extracted", Object.keys( modules ).length, "modules" );
+//   } else {
+//     console.log( "[" );
+//     modules.forEach( ( row, index ) => {
+//       if ( index > 0 ) console.log( "," );
+//       console.log( JSON.stringify( row ) );
+//     } );
+//     console.log( "]" );
+//   }
+// } );
