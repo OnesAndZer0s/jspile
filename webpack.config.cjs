@@ -1,12 +1,13 @@
 const path = require( "path" );
 
 module.exports = {
+  experiments:{ outputModule:true },
   entry: {
     index: "./src/index.ts",
-    cli: "./src/cli.ts",
+    // cli: "./src/cli.ts",
   },
   watch: true,
-  target: "node",
+  target: [  "es2020", "node" ],
   module: {
     rules: [
       {
@@ -16,14 +17,19 @@ module.exports = {
     ]
   },
   stats:{ errorDetails:true },
-  mode: "production",
+  mode: "development",
+  devtool: "source-map",
   resolve: { extensions: [ ".ts", ".js" ] },
   output: {
-    // libraryTarget: "umd",
-    chunkFormat:"commonjs",
+    library: {
+      // do not specify a `name` here
+      type: "module",
+    },
+    libraryTarget: "module",
+    module:true,
     path: path.join( __dirname, "dist" ),
-    // filename: "index.js"
-  }
+    filename: "index.js"
+  },
 };
 
 // also create one for the CLI

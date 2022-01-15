@@ -9,9 +9,9 @@
       "request": "launch",
       "runtimeArgs": [
         "run",
-        "test"
+        "testPackage"
       ],
-      "runtimeExecutable": "npm",
+      "runtimeExecutable": "yarn",
       "skipFiles": [
         "<node_internals>/**"
       ],

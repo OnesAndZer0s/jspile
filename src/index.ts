@@ -12,7 +12,6 @@ import path from "path/posix";
 // also figure out logicstical sumarizations like !0 is 1 and etc
 // this is going to be a mess
 
-console.log( "done" );
 export type FileDirectory = { path: PathLike, file: PathLike | File } | PathLike | File
 
 export interface DeobfuscationOptions {
@@ -21,24 +20,26 @@ export interface DeobfuscationOptions {
   base?: PathLike
 }
 
-export function deobfuscate( { input, output = input + "Deobf", base = "/" }: DeobfuscationOptions ) {
+export function deobfuscate( { input, output = "Deobf" + input, base = "/" }: DeobfuscationOptions ) {
 
   // option parsing
-  base += ( base.toString()[ base.toString().length - 1 ] == "/" ) ? "" : "/";
   base = path.normalize( base.toString() );
+  base += ( base.toString()[ base.toString().length - 1 ] == "/" ) ? "" : "/";
 
+  console.log( path.join( base, input.toString() ) );
+  var parsed: t.File = b.transformFileSync( path.join( base, input.toString() ), { ast:true } )!.ast!;
 
-  var parsed: b.BabelFileResult = b.transformFileSync( path.join( base, input.toString() ), { sourceType:"script" } )!;
-
-  b.traverse( parsed as t.Node, {
+  b.traverse( parsed, {
     UnaryExpression( path ){
       if ( path.node.operator == "!" && t.isNumericLiteral( path.node.argument ) && [ "0", "1" ].includes( path.node.argument.extra!.raw as string ) )
         path.replaceWith( t.booleanLiteral( ( path.node.argument.extra!.raw == "0" ) ? true : false ) );
     }
   } );
-  var { code } = generate( parsed as t.Node, {} );
+  var { code } = generate( parsed, {} );
 
+  console.log( parsed );
   fs.writeFileSync( path.join( base, output.toString() ), code, { flag:"w" } );
+  console.log( "done" );
 }
 
-deobfuscate( { base: "test/utils/samples/", input:"jquery.js" } );
+deobfuscate( { base: "test/utils/samples/", input:"jQuery.js" } );

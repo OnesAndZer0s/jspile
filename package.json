@@ -37,7 +37,8 @@
   "scripts": {
     "pretest": "node test/utils/index.mjs",
     "test": "mocha test",
-    "build": "webpack --config webpack.config.cjs"
+    "build": "webpack --config webpack.config.cjs",
+    "testPackage": "node dist/index.js"
   },
   "directories": {
     "test": "test"
