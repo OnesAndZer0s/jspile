@@ -1,0 +1,26 @@
+{
+  "name": "interpolate",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Tayler <taylermiller360@gmail.com>",
+  "homepage": "https://github.com/OnesAndZer0s/jspile/tree/main/packages/interpolate#readme",
+  "license": "ISC",
+  "main": "dist/interpolate.js",
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OnesAndZer0s/jspile.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/OnesAndZer0s/jspile/issues"
+  }
+}

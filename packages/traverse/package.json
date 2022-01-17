@@ -1,0 +1,32 @@
+{
+  "name": "traverse",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Tayler <taylermiller360@gmail.com>",
+  "homepage": "https://github.com/OnesAndZer0s/jspile/tree/main/packages/traverse#readme",
+  "license": "MIT",
+  "main": "dist/traverse.js",
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OnesAndZer0s/jspile.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/OnesAndZer0s/jspile/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.8",
+    "expect": "^27.4.6",
+    "mocha": "^9.1.3",
+    "typescript": "^4.5.4"
+  }
+}

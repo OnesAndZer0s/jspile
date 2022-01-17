@@ -15,9 +15,22 @@ import path from "path/posix";
 export type FileDirectory = { path: PathLike, file: PathLike | File } | PathLike | File
 
 export interface DeobfuscationOptions {
+
+  // File options
   input: FileDirectory
   output?: FileDirectory
   base?: PathLike
+
+  // Deopfuscation options
+  target?: string // what functions are allowed / not allowed, and interpolate with given obfuscated data. can be overwritten by specifc opts
+
+
+
+  // Specific deobfuscatopn ops.
+  // use the plugins from babel https://babeljs.io/docs/en/plugins-list
+  // https://www.obfuscator.io/
+  // https://github.com/terser/terser/blob/8f3035707c313368ade586bb43e0098fa9003505/lib/compress/index.js#L230
+
 }
 
 export function deobfuscate( { input, output = "Deobf" + input, base = "/" }: DeobfuscationOptions ) {
