@@ -19,7 +19,7 @@
     "noUnusedParameters": true,
     "allowJs": true
   },
-  "include": ["./src"],
+  "files": [ ],
   "exclude": [
     "node_modules"
   ]
