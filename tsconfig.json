@@ -4,10 +4,10 @@
     "outDir": "dist",
     "removeComments": true,
     "target":"es6",
-    // "baseUrl": "../",
+    "baseUrl": ".",
+    "rootDir": "./packages",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "paths": {},
     "module": "commonjs",
     "alwaysStrict": false,
     "allowUnreachableCode": false,
@@ -17,10 +17,14 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "~/*": ["packages/*"]
+    }
   },
-  "files": [ ],
+  "include": ["**/src"],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist/**"
   ]
 }
