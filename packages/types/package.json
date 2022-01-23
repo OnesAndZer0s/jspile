@@ -1,33 +1,43 @@
 {
-  "name": "types",
+  "name": "@jspile/types",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Tayler <taylermiller360@gmail.com>",
   "homepage": "https://github.com/OnesAndZer0s/jspile/tree/main/packages/types#readme",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/index",
+  "types": "dist/index",
+  "type": "commonjs",
   "directories": {
-    "lib": "src",
     "test": "test"
   },
-  "files": [
-    "src"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OnesAndZer0s/jspile.git"
-  },
-  "scripts": {
-    "build": "tsc && dist/index.js",
-    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/OnesAndZer0s/jspile/issues"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.0",
     "@types/node": "^17.0.8",
-    "expect": "^27.4.6",
+    "chai": "^4.3.4",
     "mocha": "^9.1.3",
     "typescript": "^4.5.4"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "compile": "rm -rf dist/* && tsc -p tsconfig.pkg.json",
+    "testArch": "mocha --loader=ts-node/esm test/types.test.ts",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'test/**/*.ts'",
+    "fuck": "mocha -r ts-node/register test/*.test.ts",
+    "shit": "ts-mocha -p tsconfig.pkg.json test/types.test.ts"
+  },
+  "keywords": [],
+  "dependencies": {
+    "ts-node": "^10.4.0"
   }
 }

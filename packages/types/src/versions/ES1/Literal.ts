@@ -11,7 +11,7 @@ export class ILiteral {
 
 
 export class BooleanLiteral extends ILiteral {
-  _value: boolean;
+  declare _value: boolean;
 
   constructor( v: boolean ){
     super();
@@ -23,22 +23,22 @@ export class BooleanLiteral extends ILiteral {
 
 
 export class NullLiteral extends ILiteral {
-  _value: null;
+  declare _value: null;
 }
 
 
 export class UndefinedLiteral extends ILiteral {
-  _value: undefined;
+  declare _value: undefined;
 }
 
 
 export class NumericLiteral extends ILiteral {
-  protected _raw: string;
+  declare protected _raw: string;
 
   protected _sign: "+" | "-" | undefined;
   protected _exponentIndicator: "e" | "E" | undefined;
   protected _exponent: string | undefined;
-  protected _type: "Hexadecimal" | "Octal" | "Decimal";
+  declare protected _type: "Hexadecimal" | "Octal" | "Decimal";
 
   constructor( v: string | number ){
     super();
@@ -120,7 +120,7 @@ export class NumericLiteral extends ILiteral {
 
 
 export class StringLiteral extends ILiteral{
-  _value: string;
+  declare _value: string;
 
   constructor( v: string ){
     super();
