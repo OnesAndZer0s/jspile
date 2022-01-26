@@ -1,4 +1,0 @@
-extends: "@typescript-monorepo-example/eslint-config-typescript"
-
-parserOptions:
-  project: './tsconfig-test.json'

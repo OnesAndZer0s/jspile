@@ -22,17 +22,24 @@
     "obfuscate",
     "deobfuscate"
   ],
-  "bin": {
-    "jspile": "dist/cli.js"
-  },
+  "bin": "dist/cli.js",
   "scripts": {
-    "clean": "lerna run clean",
-    "build": "lerna run build",
-    "build:packages": "lerna run --no-private build",
-    "lint": "lerna run --parallel lint",
-    "test": "lerna run --parallel test"
+    "build": "yarn workspaces foreach -p run build",
+    "clean": "yarn workspaces foreach -p run clean",
+    "test": "yarn workspaces foreach -p run test"
   },
-  "dependencies": {
-    "lerna": "^3.22.1"
-  }
+  "devDependencies": {
+    "@types/chai-as-promised": "^7.1.4",
+    "@types/node": "^17.0.12",
+    "chai": "^4.3.5",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^9.2.0",
+    "ts-mocha": "^9.0.2",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  },
+  "packageManager": "yarn@3.1.1",
+  "workspaces": [
+    "packages/*"
+  ]
 }

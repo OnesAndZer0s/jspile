@@ -1,8 +1,0 @@
-.idea
-cognito.json
-yarn-error.log
-.env
-ormconfig.json
-ormconfig.env
-node_modules
-dist

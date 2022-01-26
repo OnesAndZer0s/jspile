@@ -1,50 +1,61 @@
 // @TODO quote https://www.ecma-international.org/wp-content/uploads/ECMA-262_1st_edition_june_1997.pdf numbskull
-export class ILiteral {
-  protected _value: any;
+export interface ILiteral {
+  get value(): any // { return this._value; };
+  toNumber(): NumericLiteral; // { return new NumericLiteral( new Number( this._value ).valueOf() ); }
+  toString(): StringLiteral; // { return new StringLiteral( new String( this._value ).valueOf() ); }
+  toBoolean(): BooleanLiteral; // { return new BooleanLiteral( new Boolean( this.value ).valueOf() ); }
 
-  get value(){ return this._value; }
+}
+
+export class NullLiteral implements ILiteral {
+  get value(): null { return null; }
+  toNumber(): NumericLiteral { return new NumericLiteral( new Number( null ).valueOf() ); }
+  toString(): StringLiteral { return new StringLiteral( new String( null ).valueOf() ); }
+  toBoolean(): BooleanLiteral { return new BooleanLiteral( new Boolean( null ).valueOf() ); }
+}
+
+export class UndefinedLiteral implements ILiteral {
+  get value(): undefined { return undefined; }
+  toNumber(): NumericLiteral { return new NumericLiteral( new Number( undefined ).valueOf() ); }
+  toString(): StringLiteral { return new StringLiteral( new String( undefined ).valueOf() ); }
+  toBoolean(): BooleanLiteral { return new BooleanLiteral( new Boolean( undefined ).valueOf() ); }
+}
+
+export class BooleanLiteral implements  Omit<ILiteral, "toBoolean">  {
+  protected _value: boolean;
+
+  constructor( v = true ){ this._value = v; }
+
+  toggle(): this { this._value = !this._value; return this; }
+
+  get value(): boolean { return this._value; }
   toNumber(): NumericLiteral { return new NumericLiteral( new Number( this._value ).valueOf() ); }
-  toString( r: number ): StringLiteral { return new StringLiteral( this._value.toString( r ) ); }
+  toString(): StringLiteral { return new StringLiteral( new String( this._value ).valueOf() ); }
+}
+
+export class StringLiteral implements  Omit<ILiteral, "toString">{
+  protected _value: string;
+
+  constructor( v = "" ){ this._value = v; }
+
+  get value(): string { return this._value; }
+  toNumber(): NumericLiteral { return new NumericLiteral( new Number( this._value ).valueOf() ); }
   toBoolean(): BooleanLiteral { return new BooleanLiteral( new Boolean( this.value ).valueOf() ); }
-
 }
 
-
-export class BooleanLiteral extends ILiteral {
-  declare _value: boolean;
-
-  constructor( v: boolean ){
-    super();
-    this._value = v;
-  }
-
-  invert(): this { this._value = !this.value; return this; }
-}
-
-
-export class NullLiteral extends ILiteral {
-  declare _value: null;
-}
-
-
-export class UndefinedLiteral extends ILiteral {
-  declare _value: undefined;
-}
-
-
-export class NumericLiteral extends ILiteral {
-  declare protected _raw: string;
-
+export class NumericLiteral implements Omit<ILiteral, "toNumber"> {
+  protected _raw: string;
+  protected _value: number;
+  
   protected _sign: "+" | "-" | undefined;
   protected _exponentIndicator: "e" | "E" | undefined;
   protected _exponent: string | undefined;
   declare protected _type: "Hexadecimal" | "Octal" | "Decimal";
-
-  constructor( v: string | number ){
-    super();
-    if ( /0[xX][0-9a-fA-F]+/mg.test( String( v ) ).valueOf() ) this.type = "Hexadecimal";
-    else if ( /0[oO][0-8]+/mg.test( String( v ).valueOf() ) ) this.type = "Octal";
-    else this.type = "Decimal";
+  
+  constructor( v: string | number = 0 ){
+    if ( /0[xX][0-9a-fA-F]+/mg.test( String( v ) ).valueOf() ) this._type = "Hexadecimal";
+    else if ( /0[oO][0-8]+/mg.test( String( v ).valueOf() ) ) this._type = "Octal";
+    else this._type = "Decimal";
     this.raw = String( v ).valueOf();
   }
 
@@ -109,29 +120,12 @@ export class NumericLiteral extends ILiteral {
   toOctal(): this {  this.type = "Octal"; return this; }
   toDecimal(): this {  this.type = "Decimal"; return this; }
 
-  toBoolean(): BooleanLiteral { return new BooleanLiteral( new Boolean( this._value ).valueOf() ); }
-  toString( r: number ): StringLiteral { return new StringLiteral( this._value.toString( r ) ); }
-
   set value( v: number ) { this._value = v; this._raw = new String( v ).valueOf(); }
 
   set raw( v: string ) { this._raw = v; this._value = new Number( v ).valueOf(); }
   get raw(): string { return this._raw; }
+
+
+  toString(): StringLiteral { return new StringLiteral( this._raw ); }
+  toBoolean(): BooleanLiteral { return new BooleanLiteral( new Boolean( this.value ).valueOf() ); }
 }
-
-
-export class StringLiteral extends ILiteral{
-  declare _value: string;
-
-  constructor( v: string ){
-    super();
-    this._value = v;
-  }
-
-}
-
-
-
-var test: NumericLiteral = new NumericLiteral( 10 );
-
-test.setExponent( { exponent:10 } );
-console.log( test.value );
