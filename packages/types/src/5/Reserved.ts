@@ -1,0 +1,3 @@
+export const Reserved = [ "break", "case", "catch", "continue", "debugger", "default", "delete", "do", "else", "finally", "for", "function", "if", "in", "instanceof", "new", "return", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with" ];
+export const ReservedFuture = [ "class", "const", "enum", "export", "extends", "import", "super" ];
+export const ReservedFutureStrict = [ "implements", "interface", "let", "package", "private", "protected", "public", "static", "yield" ];

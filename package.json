@@ -1,6 +1,6 @@
 {
   "name": "jspile",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "main": "index.js",
   "author": "Tayler Miller <taylermiller360@gmail.com>",
   "bugs": {
@@ -26,7 +26,8 @@
   "scripts": {
     "build": "yarn workspaces foreach -p run build",
     "clean": "yarn workspaces foreach -p run clean",
-    "test": "yarn workspaces foreach -p run test"
+    "test": "yarn workspaces foreach -p run test",
+    "release": "echo \"FIXME MOTHERFUCKER\""
   },
   "devDependencies": {
     "@types/chai-as-promised": "^7.1.4",

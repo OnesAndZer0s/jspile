@@ -1,13 +1,28 @@
 {
   "configurations": [
     {
-      "name": "Launch via NPM",
+      "name": "Test types",
+      "request": "launch",
+      "runtimeArgs": [
+        "workspace",
+        "@jspile/types",
+        "run",
+        "test"
+      ],
+      "runtimeExecutable": "yarn",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node"
+    },
+    {
+      "name": "Test all",
       "request": "launch",
       "runtimeArgs": [
         "run",
         "test"
       ],
-      "runtimeExecutable": "npm",
+      "runtimeExecutable": "yarn",
       "skipFiles": [
         "<node_internals>/**"
       ],
