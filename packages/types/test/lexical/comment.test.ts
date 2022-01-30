@@ -6,38 +6,39 @@ import * as t from "../../src";
 Chai.use( chaiAsPromised );
 
 describe( "Comments", function() {
-  describe( "Single Line Comments", function(){
+  describe( "Single Line Comments", function() {
     // comments do not change that much with ECMA standards, so we just yoink the first one.
-    var v = t.v1,
-        slc = new v.SingleLineComment( "test" );
+    var v = t.v1;
 
-    it( "should deal with new comment", function(){
-      slc.comment = "SHIT";
-      expect( slc.value ).to.be.string( "// SHIT" );
+    it( "parse from string", function() {
+      expect( new v.SingleLineComment( "SHIT" ).value ).to.be.string( "// SHIT" );
+      expect( new v.SingleLineComment( "// SHIT" ).value ).to.be.string( "// SHIT" );
+      expect( new v.SingleLineComment( " SHIT" ).value ).to.be.string( "// SHIT" );
+
     } );
 
-    it( "should convert to MultiLineComment", function(){
-      slc.comment = "FUCK";
-      var m = slc.toMultiLine();
+    it( "convert to MultiLineComment", function() {
+      var slc = new v.SingleLineComment( "FUCK" ),
+          m = slc.toMultiLine();
 
       expect( m.constructor.name ).to.be.string( v.MultiLineComment.name );
       expect( m.value ).to.be.string( "/* FUCK */" );
       slc.comment = "ASS\nCUNT\nBITCH";
-      m = slc.toMultiLine();
-      expect( m.value ).to.be.string( 
-        `/* 
-         ASS
-         CUNT
-         BITCH 
-         */`
-      );
-
+      expect( slc.toMultiLine().value ).to.be.string( "/* ASS\nCUNT\nBITCH */" );
+      slc.comment = "/* ASS\nCUNT\nBITCH */";
+      expect( slc.toMultiLine().value ).to.be.string( "/* ASS\nCUNT\nBITCH */" );
     } );
 
-    it( "should convert to DocComment", function(){
-      expect( slc.toDoc() ).to.be.string( v.DocComment.name );
-      expect( slc.toDoc() ).to.be.string( v.DocComment.name );
-      expect( slc.toDoc() ).to.be.string( v.DocComment.name );
+    it( "dynamically change values", function() {
+      var slc = new v.SingleLineComment( "FUCK" );
+
+      expect( slc ).to.eql( new v.SingleLineComment( "FUCK" ) );
+      slc.value = "// FUCKASS";
+      expect( slc ).to.eql( new v.SingleLineComment( "// FUCKASS" ) );
+      slc.spaced = false;
+      expect( slc ).to.eql( new v.SingleLineComment( "//FUCKASS" ) );
+      slc.value = " SHIT";
+      expect( slc ).to.eql( new v.SingleLineComment( "// SHIT" ) );
 
     } );
 

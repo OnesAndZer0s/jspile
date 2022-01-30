@@ -11,13 +11,13 @@ describe( "v1 Literals", function() {
   describe( "NullLiteral", function() {
     var nullVariable = new v.NullLiteral();
 
-    it( "can convert to string", function() {
+    it( "convert to string", function() {
       expect( nullVariable.toString().value ).to.be.equal( "null" );
     } );
-    it( "can convert to number", function() {
+    it( "convert to number", function() {
       expect( nullVariable.toNumber().value ).to.be.equal( 0 );
     } );
-    it( "can convert to a boolean", function() {
+    it( "convert to a boolean", function() {
       expect( nullVariable.toBoolean().value ).to.be.false;
     } );
   } );
@@ -25,24 +25,24 @@ describe( "v1 Literals", function() {
   describe( "UndefinedLiteral", function() {
     var undefinedVariable = new v.UndefinedLiteral();
 
-    it( "can convert to string", function() {
+    it( "convert to string", function() {
       expect( undefinedVariable.toString().value ).to.be.equal( "undefined" );
     } );
-    it( "can convert to number", function() {
+    it( "convert to number", function() {
       expect( undefinedVariable.toNumber().value ).to.be.NaN;
     } );
-    it( "can convert to a boolean", function() {
+    it( "convert to a boolean", function() {
       expect( undefinedVariable.toBoolean().value ).to.be.false;
     } );
   } );
 
   describe( "StringLiteral", function() {
-    var stringVariable = new v.StringLiteral( "testing" );
+    var stringVariable = new v.StringLiteral( "ASS" );
 
-    it( "can convert to number", function() {
+    it( "convert to number", function() {
       expect( stringVariable.toNumber().value ).to.be.NaN;
     } );
-    it( "can convert to a boolean", function() {
+    it( "convert to a boolean", function() {
       expect( stringVariable.toBoolean().value ).to.be.true;
     } );
   } );
